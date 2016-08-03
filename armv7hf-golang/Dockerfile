@@ -1,5 +1,5 @@
 FROM resin/armv7hf-debian
-MAINTAINER dbarroso
+MAINTAINER dbarrosop
 
 LABEL go.version=1.6.3
 
