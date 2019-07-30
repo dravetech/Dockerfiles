@@ -1,0 +1,15 @@
+FROM balenalib/armv7hf-debian
+MAINTAINER dbarrosop
+
+RUN apt-get update \
+	&& apt-get upgrade -y --no-install-recommends
+
+RUN apt-get install -y --no-install-recommends ca-certificates stubby
+
+RUN apt-get -y autoremove \
+	&& apt-get -y clean \
+	&& apt-get -y autoclean \
+	&& rm -rf /build /tmp/* /var/tmp/* \
+	&& rm -rf /var/lib/apt/lists/*
+
+ENTRYPOINT ["stubby"]

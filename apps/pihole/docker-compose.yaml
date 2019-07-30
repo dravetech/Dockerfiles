@@ -1,0 +1,50 @@
+---
+version: "3"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "80:80/tcp"
+      - "443:443/tcp"
+    environment:
+      TZ: "UTC"
+      DNS1: "172.21.32.100"
+      DNS2: "172.21.32.100"
+      # WEBPASSWORD: 'set a secure password here or it will be random'
+    # Volumes store your data between container upgrades
+    volumes:
+       - './etc-pihole/:/etc/pihole/'
+       - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
+    # Recommended but not required (DHCP needs NET_ADMIN)
+    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+    cap_add:
+      - NET_ADMIN
+    networks:
+      net1:
+    restart: unless-stopped
+  stubby:
+    build:
+      context: .
+      dockerfile: Dockerfile.stubby
+    volumes:
+      - './etc-stubby/:/etc/stubby/'
+    command: [
+      "-C", "/etc/stubby/stubby.yaml",
+    ]
+    networks:
+      net1:
+        ipv4_address: 172.21.32.100
+    restart: unless-stopped
+
+networks:
+  net1:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.32.0/24

@@ -1,0 +1,12 @@
+---
+version: '3'
+services:
+  ddns:
+    restart: unless-stopped
+    image: armv7hf-ez-ipupdate
+    command: [
+      "-u", "$ZE_USERNAME:$ZE_PASSWORD",
+      "-h", "$ZE_FQDN",
+      "-S", "zoneedit",
+      "-s", "api.cp.zoneedit.com",
+    ]

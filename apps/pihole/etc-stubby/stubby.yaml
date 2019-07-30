@@ -1,0 +1,17 @@
+resolution_type: GETDNS_RESOLUTION_STUB
+dns_transport_list: 
+  - GETDNS_TRANSPORT_TLS
+tls_authentication: GETDNS_AUTHENTICATION_REQUIRED
+tls_query_padding_blocksize: 256
+edns_client_subnet_private : 1
+idle_timeout: 10000
+listen_addresses:
+  - 127.0.0.1
+  -  0::1
+round_robin_upstreams: 1
+upstream_recursive_servers:
+  - address_data: 37.252.185.232
+    tls_auth_name: "dot1.appliedprivacy.net"
+listen_addresses:
+  - address_data: 0.0.0.0
+    port: 53
