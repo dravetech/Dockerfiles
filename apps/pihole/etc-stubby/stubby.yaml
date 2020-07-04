@@ -10,8 +10,16 @@ listen_addresses:
   -  0::1
 round_robin_upstreams: 1
 upstream_recursive_servers:
-  - address_data: 37.252.185.232
-    tls_auth_name: "dot1.appliedprivacy.net"
+  - address_data: 94.130.106.88
+    tls_auth_name: "dot1.applied-privacy.net"
+    tls_port: 853
+  - address_data: 89.233.43.71
+    tls_auth_name: "unicast.censurfridns.dk"
+    tls_port: 853
+  - address_data: 185.49.141.37
+    tls_auth_name: "getdnsapi.net"
+    tls_port: 853
+
 listen_addresses:
   - address_data: 0.0.0.0
     port: 53

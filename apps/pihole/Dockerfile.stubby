@@ -1,4 +1,5 @@
-FROM balenalib/armv7hf-debian
+#FROM balenalib/armv7hf-debian
+FROM debian:latest
 MAINTAINER dbarrosop
 
 RUN apt-get update \
